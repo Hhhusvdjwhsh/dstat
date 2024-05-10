@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Request Counter</title>
+</head>
+<body>
+    <h1>Live Request Counter</h1>
+    <p id="requestCount">Jumlah request: 0</p>
+
+    <script>
+        // Fungsi untuk fetch jumlah request dari file log
+        function getRequestCount() {
+            fetch('request.log')
+            .then(response => response.text())
+            .then(data => {
+                const count = data.split('\n').length - 1;
+                document.getElementById('requestCount').innerText = `Jumlah request: ${count}`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Jalankan getRequestCount setiap detik
+        setInterval(getRequestCount, 1000);
+    </script>
+</body>
+</html>
